@@ -110,10 +110,10 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
         if (event.getSource() == btnCharger) {
         	
         } 
-        else if (event.getSource() == btnEnregistrer) {
+        if (event.getSource() == btnEnregistrer) {
         	
         }
-        else if (event.getSource() == btnAjouter) {
+        if (event.getSource() == btnAjouter) {
         	
         }
         
