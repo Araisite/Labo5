@@ -1,4 +1,3 @@
-package test;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -6,6 +5,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -45,7 +46,11 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
     JPanel buttonContainer = new JPanel(); 
     JButton myButton = null;
     
+    private MotActuel mot = new MotActuel();
+    
     public LayoutPrincipal() {
+    	
+    	
                
         this.btnCharger.addActionListener( this );
         pnlBouton.add( this.btnCharger );
@@ -104,6 +109,9 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
         frameMain.setLocationRelativeTo(null); 
         frameMain.setVisible(true); 
         frameMain.setResizable(false); 
+        
+        pnlChercher.addKeyListener(new MonEcouteurClavier());
+        
     }
     
     @Override public void actionPerformed( ActionEvent event ) {
@@ -120,8 +128,80 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
         this.frameMain.revalidate();
     }
     
-    public static void main( String[] args ) throws Exception {        
+    
+    public class MonEcouteurClavier implements KeyListener {
 
-        new LayoutPrincipal().setVisible( true );
-    }
+		@Override
+		public void keyTyped(KeyEvent e) {
+						
+		}
+		
+		@Override
+		public void keyPressed(KeyEvent e) {
+				
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			
+			//Selon ce que l'écouteur de la touche reçoit
+			switch (e.getKeyCode()) {
+				
+				case KeyEvent.VK_A : mot.setMot('a');
+				System.out.print("TEST");
+						   break;
+				case KeyEvent.VK_B : mot.setMot('b');
+				   		   break;					
+				case KeyEvent.VK_C : mot.setMot('c');
+		   		   		   break;						
+				case KeyEvent.VK_D : mot.setMot('d');
+						   break;
+				case KeyEvent.VK_E : mot.setMot('e');
+						   break;
+				case KeyEvent.VK_F : mot.setMot('f');
+						   break;
+				case KeyEvent.VK_G : mot.setMot('g');
+						   break;
+				case KeyEvent.VK_H : mot.setMot('h');
+					 	   break;
+				case KeyEvent.VK_I : mot.setMot('i');
+						   break;
+				case KeyEvent.VK_J : mot.setMot('j');
+						   break;
+				case KeyEvent.VK_K : mot.setMot('k');
+						   break;
+				case KeyEvent.VK_L : mot.setMot('l');
+						   break;
+				case KeyEvent.VK_M : mot.setMot('m');
+						   break;
+				case KeyEvent.VK_N : mot.setMot('n');
+				 	   	   break;
+				case KeyEvent.VK_O : mot.setMot('o');
+						   break;
+				case KeyEvent.VK_P : mot.setMot('p');
+						   break;
+				case KeyEvent.VK_Q : mot.setMot('q');
+						   break;
+				case KeyEvent.VK_R : mot.setMot('r');
+						   break; 
+				case KeyEvent.VK_S : mot.setMot('s');
+						   break;
+				case KeyEvent.VK_T : mot.setMot('t');
+				 	   	   break;
+				case KeyEvent.VK_U : mot.setMot('u');
+						   break;
+				case KeyEvent.VK_V : mot.setMot('v');
+						   break;
+				case KeyEvent.VK_W : mot.setMot('w');
+						   break;
+				case KeyEvent.VK_X : mot.setMot('x');
+						   break;
+				case KeyEvent.VK_Y : mot.setMot('y');
+						   break;
+				case KeyEvent.VK_Z : mot.setMot('z');
+					   	   break;
+			}
+		}		
+	}
+   
 }
