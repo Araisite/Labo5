@@ -1,27 +1,14 @@
 package test;
-		import java.awt.BorderLayout;
-		import java.awt.Component;
-		import java.awt.Dimension;
-		import java.awt.FlowLayout;
-		import java.awt.GridLayout;
+		import java.awt.*;
 		import java.awt.event.ActionEvent;
 		import java.awt.event.ActionListener;
 		import java.awt.event.KeyEvent;
 		import java.awt.event.KeyListener;
+		import java.io.*;
+		import java.nio.file.Files;
+		import java.nio.file.StandardOpenOption;
 
-		import javax.swing.BorderFactory;
-		import javax.swing.BoxLayout;
-		import javax.swing.GroupLayout;
-		import javax.swing.JButton;
-		import javax.swing.JFrame;
-		import javax.swing.JLabel;
-		import javax.swing.JPanel;
-		import javax.swing.JScrollPane;
-		import javax.swing.JTextArea;
-		import javax.swing.JTextField;
-		import javax.swing.JToolBar;
-		import javax.swing.JTree;
-		import javax.swing.ScrollPaneConstants;
+		import javax.swing.*;
 		import javax.swing.border.Border;
 
 
@@ -44,9 +31,8 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 	private JLabel label2 = new JLabel("def");
 	private JLabel label3 = new JLabel("terrible");
 
-	private JLabel afficheDef = new JLabel("test");
-
 	private JTextField tfMot = new JTextField(16);
+	private JTextField tfDef = new JTextField(16);
 
 
 	JPanel buttonContainer = new JPanel();
@@ -93,7 +79,7 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 		pnlDef.setPreferredSize(new Dimension(400, 100));
 		pnlDef.setMaximumSize(new Dimension(400, 100));
 		pnlDef.setBorder(BorderFactory.createTitledBorder("Definition"));
-		pnlDef.add(afficheDef);
+		pnlDef.add(tfDef);
 		//pnlDef.add(Dictionnaire.getDefinition(1));
 
 		pnlMain.add(pnlDef, BorderLayout.CENTER);
@@ -129,14 +115,22 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource() == myButton) {
-			afficheDef.setText(testDico.getDefinition(2));
+			tfDef.setText(testDico.getDefinition(2));
 			pnlChercher.repaint();
 		}
-		if (event.getSource() == btnEnregistrer) {
+		if (event.getSource() == btnCharger) {
+			new Dictionnaire();
+
+		}
+		if (event.getSource() == btnEnregistrer){
 
 		}
 		if (event.getSource() == btnAjouter) {
-
+			String mot = tfMot.getText();
+			String def = tfDef.getText();
+			new AjouterMotFichier(mot,def);
+			//tfMot.setText("");
+			//tfDef.setText("");
 		}
 
 		this.frameMain.revalidate();
