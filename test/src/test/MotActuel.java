@@ -7,7 +7,7 @@ public class MotActuel {
 	
 	
 	String mot = "";
-	Dictionnaire dictionnaire = new Dictionnaire();
+	test.Dictionnaire dictionnaire = new Dictionnaire();
 	
 	public void setMot (char lettreTappe) {
 		
@@ -16,7 +16,7 @@ public class MotActuel {
 		System.out.print(mot);
 		
 		
-		LexiNode test2 = new LexiNode(lettreTappe, dictionnaire, mot.length()-1);
+		test.LexiNode test2 = new LexiNode(lettreTappe, dictionnaire, mot.length()-1);
 		dictionnaire = test2.getDictionnaire();
 	}
 	

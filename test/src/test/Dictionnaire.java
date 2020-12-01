@@ -1,11 +1,12 @@
 package test;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Dictionnaire {
 
-	private LinkedList <String> dictionnaire = new LinkedList <String> ();
+	public LinkedList <String> dictionnaire = new LinkedList <String> ();
 	
 	public Dictionnaire (){
 		
