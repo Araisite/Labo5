@@ -1,12 +1,9 @@
-package test;
-
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Dictionnaire {
 
-	public LinkedList <String> dictionnaire = new LinkedList <String> ();
+	private LinkedList <String> dictionnaire = new LinkedList <String> ();
 	
 	public Dictionnaire (){
 		
@@ -20,9 +17,9 @@ public class Dictionnaire {
 		String [] separation;
 		
 		separation = dictionnaire.get(i).split("&");
-		separation[0].trim();
+	
 		
-		return separation[0];
+		return separation[0].trim();
 	}
 	
 	public String getDefinition(int i) {
@@ -30,9 +27,9 @@ public class Dictionnaire {
 		String [] separation;
 		
 		separation = dictionnaire.get(i).split("&");
-		separation[1].trim();
 		
-		return separation[1];
+		
+		return separation[1].trim();
 	}
 	
 	public int getNbrMots () {
@@ -40,28 +37,13 @@ public class Dictionnaire {
 		return dictionnaire.size();
 	}
 	
-
-	
-	
-	public void updateDictionnaire (char noeud, int index) {
+	public boolean contenirDtcionnaire(String mot) {
 		
+		boolean verif = false;
 		
-		
-		for (int i=0; i<dictionnaire.size(); i++) {
-			
-			
-			if (noeud != getMot(i).charAt(index)) {
-				
-								
-				dictionnaire.remove(i);
-				i=i-1;
-				
-				System.out.println("XXX");
-				
-			}
-			
+		if (dictionnaire.contains(mot)) {
+			verif = true;
 		}
-
-	}
-	
+		return verif;
+	}	
 }

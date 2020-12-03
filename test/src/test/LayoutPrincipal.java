@@ -1,15 +1,28 @@
-package test;
-		import java.awt.*;
-		import java.awt.event.ActionEvent;
-		import java.awt.event.ActionListener;
-		import java.awt.event.KeyEvent;
-		import java.awt.event.KeyListener;
-		import java.io.*;
-		import java.nio.file.Files;
-		import java.nio.file.StandardOpenOption;
 
-		import javax.swing.*;
-		import javax.swing.border.Border;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JToolBar;
+import javax.swing.JTree;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.border.Border;
 
 
 public class LayoutPrincipal extends JFrame implements ActionListener {
@@ -31,17 +44,21 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 	private JLabel label2 = new JLabel("def");
 	private JLabel label3 = new JLabel("terrible");
 
+	private JLabel afficheDef = new JLabel("");
+
 	private JTextField tfMot = new JTextField(16);
-	private JTextField tfDef = new JTextField(16);
 
 
 	JPanel buttonContainer = new JPanel();
 
-	private MotActuel mot = new MotActuel();
+	
 	private Dictionnaire testDico = new Dictionnaire();
-
+	private MotActuel motActuel = new MotActuel(testDico);
+	
 	private int i = 0;
 	private JButton[] myButton = new JButton[testDico.getNbrMots()];
+	
+	private JTextArea afficheChercher = new JTextArea();
 
 	public LayoutPrincipal() {
 
@@ -79,7 +96,7 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 		pnlDef.setPreferredSize(new Dimension(400, 100));
 		pnlDef.setMaximumSize(new Dimension(400, 100));
 		pnlDef.setBorder(BorderFactory.createTitledBorder("Definition"));
-		pnlDef.add(tfDef);
+		pnlDef.add(afficheDef);
 		//pnlDef.add(Dictionnaire.getDefinition(1));
 
 		pnlMain.add(pnlDef, BorderLayout.CENTER);
@@ -92,7 +109,7 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 		pnlChercher.setMaximumSize(new Dimension(200, 100));
 		pnlChercher.setBorder(BorderFactory.createTitledBorder("Chercher"));
 		pnlChercher.add(tfMot, BorderLayout.NORTH);
-		JTextArea afficheChercher = new JTextArea();
+		
 		pnlChercher.add(afficheChercher);
 		pnlMain.add(pnlChercher, BorderLayout.WEST);
 
@@ -107,6 +124,9 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 		frameMain.setVisible(true);
 		frameMain.setResizable(false);
 
+		
+		motActuel.setMot(' ');
+		afficheChercher.setText(motActuel.getAffichage());
 
 	}
 
@@ -115,22 +135,14 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource() == myButton) {
-			tfDef.setText(testDico.getDefinition(2));
+			afficheDef.setText(testDico.getDefinition(2));
 			pnlChercher.repaint();
 		}
-		if (event.getSource() == btnCharger) {
-			new Dictionnaire();
-
-		}
-		if (event.getSource() == btnEnregistrer){
+		if (event.getSource() == btnEnregistrer) {
 
 		}
 		if (event.getSource() == btnAjouter) {
-			String mot = tfMot.getText();
-			String def = tfDef.getText();
-			new AjouterMotFichier(mot,def);
-			//tfMot.setText("");
-			//tfDef.setText("");
+
 		}
 
 		this.frameMain.revalidate();
@@ -151,64 +163,15 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-
-			//Selon ce que l'écouteur de la touche reçoit
-			switch (e.getKeyCode()) {
-
-				case KeyEvent.VK_A : mot.setMot('a');
-					System.out.print("TEST");
-					break;
-				case KeyEvent.VK_B : mot.setMot('b');
-					break;
-				case KeyEvent.VK_C : mot.setMot('c');
-					break;
-				case KeyEvent.VK_D : mot.setMot('d');
-					break;
-				case KeyEvent.VK_E : mot.setMot('e');
-					break;
-				case KeyEvent.VK_F : mot.setMot('f');
-					break;
-				case KeyEvent.VK_G : mot.setMot('g');
-					break;
-				case KeyEvent.VK_H : mot.setMot('h');
-					break;
-				case KeyEvent.VK_I : mot.setMot('i');
-					break;
-				case KeyEvent.VK_J : mot.setMot('j');
-					break;
-				case KeyEvent.VK_K : mot.setMot('k');
-					break;
-				case KeyEvent.VK_L : mot.setMot('l');
-					break;
-				case KeyEvent.VK_M : mot.setMot('m');
-					break;
-				case KeyEvent.VK_N : mot.setMot('n');
-					break;
-				case KeyEvent.VK_O : mot.setMot('o');
-					break;
-				case KeyEvent.VK_P : mot.setMot('p');
-					break;
-				case KeyEvent.VK_Q : mot.setMot('q');
-					break;
-				case KeyEvent.VK_R : mot.setMot('r');
-					break;
-				case KeyEvent.VK_S : mot.setMot('s');
-					break;
-				case KeyEvent.VK_T : mot.setMot('t');
-					break;
-				case KeyEvent.VK_U : mot.setMot('u');
-					break;
-				case KeyEvent.VK_V : mot.setMot('v');
-					break;
-				case KeyEvent.VK_W : mot.setMot('w');
-					break;
-				case KeyEvent.VK_X : mot.setMot('x');
-					break;
-				case KeyEvent.VK_Y : mot.setMot('y');
-					break;
-				case KeyEvent.VK_Z : mot.setMot('z');
-					break;
-			}
+			
+			motActuel.setMot(e.getKeyChar()); 
+			afficheChercher.setText("");
+			afficheDef.setText("");
+			afficheChercher.setText(motActuel.getAffichage());
+			afficheDef.setText(motActuel.getDef());
+			
+			
+			
 		}
 	}
 

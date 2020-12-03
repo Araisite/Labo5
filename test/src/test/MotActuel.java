@@ -1,24 +1,135 @@
-package test;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class MotActuel {
 	
 	
-	String mot = "";
-	test.Dictionnaire dictionnaire = new Dictionnaire();
+	String mot;
+	
+	Dictionnaire dictionnaire;
+	String affichage="";
+	boolean verif=false;
+	String definition="";
+	
+
+	
+	
+	
+	public MotActuel (Dictionnaire dictionnaire) {
+		
+		mot = "";
+		this.dictionnaire = dictionnaire;		
+	}
+	
 	
 	public void setMot (char lettreTappe) {
 		
-		mot = mot + lettreTappe;
+		String motAffiche = "";
+		definition = "";
 		
-		System.out.print(mot);
+		lettreTappe = Character.toUpperCase(lettreTappe);
 		
+		LexiNode lexinode = new LexiNode ();
+		lexinode = dictionnaireInitial(lexinode);
 		
-		test.LexiNode test2 = new LexiNode(lettreTappe, dictionnaire, mot.length()-1);
-		dictionnaire = test2.getDictionnaire();
+		if (lettreTappe != ' ') {
+			
+			if (lettreTappe == '\b') {
+				
+				mot = mot.substring(0, mot.length()-1);
+			}
+			else {
+				mot = mot + lettreTappe;
+			}
+			
+			
+			
+			affichage = "";
+			
+
+			
+			lexinode = lexinode.noeudCourant(mot);
+		
+		}	
+		
+				
+		construireDcitionnaire(lexinode, motAffiche, verif);
+		dictionnaireDefinition(lexinode);
+		
+		if (lexinode.getEnfants().size() == 0 && lexinode.getDefinition() == "") {
+			
+			affichage = "";
+		}
+	                
 	}
+	
+	
+	public void construireDcitionnaire(LexiNode lexinode, String motaffiche, boolean verif) {
+		
+		String motTemp = motaffiche + lexinode.getLettreAcutelle();
+		
+		
+		if (verif == false) {
+			
+			motTemp = motaffiche;
+		}
+		
+		
+		if (lexinode.getEnfants().size() == 0 || lexinode.getDefinition().contentEquals("")==false) {
+			
+			
+			
+			affichage = affichage + mot + motTemp + '\n';
+			motaffiche = "";
+			
+		}
+		
+		
+		for (int i=0; i<lexinode.getEnfants().size() ; i++) {	
+			
+			
+			
+			construireDcitionnaire(lexinode.getEnfants().get(i), motTemp, true);
+			
+			
+		}
+	
+		
+			
+	}
+
+
+	public LexiNode dictionnaireInitial (LexiNode lexinode) {
+		
+		
+		for(int i=0; i<dictionnaire.getNbrMots(); i++) {
+			
+			
+				lexinode.ajouterMot(dictionnaire.getMot(i), dictionnaire.getDefinition(i));
+			
+		}
+		return lexinode;
+	}
+	
+	public String getAffichage () {
+		
+		return affichage;
+	}
+	public String getDef () {
+		
+		return definition;
+	}
+	
+	public void dictionnaireDefinition(LexiNode lexinode) {
+		
+		
+		if (lexinode.getDefinition().contentEquals("")==false) {
+			System.out.print("ES");
+			definition = lexinode.getDefinition();
+		}
+	}
+	
+
 	
 	
 	
