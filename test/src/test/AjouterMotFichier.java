@@ -1,3 +1,4 @@
+package test;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,9 +8,11 @@ import java.io.IOException;
 public class AjouterMotFichier {
 
 
-    private File nomDuFichier = new File("C:\\Users\\cocos\\Documents\\test.txt");
+    //private static File nomDuFichier;
+    private static File nomDuFichier = new File("C:\\Users\\cocos\\Documents\\test.txt");
 
-    public AjouterMotFichier(String mot, String def) {
+
+    public AjouterMotFichier(String mot, String def) throws IOException {
         AjouterMot(mot,def);
     }
 
@@ -19,16 +22,16 @@ public class AjouterMotFichier {
         FileWriter ecrire = null;
 
         try {
+            //File nomDuFichier = File.createTempFile("data", null);
             ecrire = new FileWriter(nomDuFichier, true); // Permet d'ecrire dans le fichier sans supprimer son contenu
             bufEcrire = new BufferedWriter(ecrire);
             bufEcrire.newLine(); // Saut a la ligne
             bufEcrire.write(mot + " & " + def);
+            System.out.println(nomDuFichier.getCanonicalPath());
 
             System.out.println("Done");
-
         } catch (IOException e) {
 
-            //e.printStackTrace();
 
         } finally {
 
@@ -47,6 +50,8 @@ public class AjouterMotFichier {
             }
 
         }
-
     }
+        public static File getFichier(){return nomDuFichier;}
+
+        public static void supFichier(){ nomDuFichier.delete();}
     }

@@ -1,3 +1,4 @@
+package test;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -8,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -45,6 +47,7 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 	private JLabel label3 = new JLabel("terrible");
 
 	private JTextArea afficheDef = new JTextArea("");
+	private JTextArea afficheChercher = new JTextArea();
 
 	private JTextField tfMot = new JTextField(16);
 
@@ -58,7 +61,6 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 	private int i = 0;
 	private JButton[] myButton = new JButton[testDico.getNbrMots()];
 	
-	private JTextArea afficheChercher = new JTextArea();
 
 	public LayoutPrincipal() {
 
@@ -135,15 +137,26 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		if (event.getSource() == myButton) {
-			afficheDef.setText(testDico.getDefinition(2));
+		if (event.getSource() == myButton[2]) {
+			afficheDef.setText(motActuel.getDef());
 			pnlChercher.repaint();
 		}
 		if (event.getSource() == btnEnregistrer) {
-
+			try {
+				new EnregistrerFichierTXT();
+				AjouterMotFichier.supFichier();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		if (event.getSource() == btnAjouter) {
-
+			String mot = tfMot.getText();
+			String def = afficheDef.getText();
+			try {
+				new AjouterMotFichier(mot,def);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 		this.frameMain.revalidate();
