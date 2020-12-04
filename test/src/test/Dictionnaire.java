@@ -1,6 +1,5 @@
 package test;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Dictionnaire {
@@ -18,9 +17,9 @@ public class Dictionnaire {
 			String min = dictionnaire.get(i).toLowerCase();
 			dictionnaire.set(i, min);
 		}
-		
+
 	}
-	
+
 	public String getMot(int i) {
 		
 		String [] separation;
