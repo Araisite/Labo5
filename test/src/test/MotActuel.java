@@ -27,7 +27,7 @@ public class MotActuel {
 		String motAffiche = "";
 		definition = "";
 		
-		lettreTappe = Character.toUpperCase(lettreTappe);
+		lettreTappe = Character.toLowerCase(lettreTappe);
 		
 		LexiNode lexinode = new LexiNode ();
 		lexinode = dictionnaireInitial(lexinode);
@@ -51,12 +51,13 @@ public class MotActuel {
 			lexinode = lexinode.noeudCourant(mot);
 		
 		}	
-		
+	
 				
 		construireDcitionnaire(lexinode, motAffiche, verif);
 		dictionnaireDefinition(lexinode);
 		
-		if (lexinode.getEnfants().size() == 0 && lexinode.getDefinition() == "") {
+		//Condition d'affichage d'une lettre qui n'est pas dans les choix du dictionnaire
+		if (lexinode.getEnfants().size() == 0 && lexinode.getDefinition().isEmpty()) {
 			
 			affichage = "";
 		}
@@ -78,10 +79,8 @@ public class MotActuel {
 		if (lexinode.getEnfants().size() == 0 || lexinode.getDefinition().contentEquals("")==false) {
 			
 			
-			
 			affichage = affichage + mot + motTemp + '\n';
 			motaffiche = "";
-			
 		}
 		
 		
@@ -100,13 +99,32 @@ public class MotActuel {
 
 
 	public LexiNode dictionnaireInitial (LexiNode lexinode) {
-		
-		
+	
 		for(int i=0; i<dictionnaire.getNbrMots(); i++) {
 			
+			for(int j=0; j<dictionnaire.getNbrMots(); j++) {
+			
+				if(dictionnaire.getMot(i).contentEquals(dictionnaire.getMot(j))) {
+					
+					
+					if (j!=i) {
+						
+						String def = dictionnaire.getLigne(i) + '\n' + '\n' + dictionnaire.getDefinition(j);
+						
+						dictionnaire.setDefinition(def, i);
+						dictionnaire.deleteMot(j);
+						
+					}
+				}
+			}
+	
+		
+		}
+		
+		for(int i=0; i<dictionnaire.getNbrMots(); i++) {
+				
 			
 				lexinode.ajouterMot(dictionnaire.getMot(i), dictionnaire.getDefinition(i));
-			
 		}
 		return lexinode;
 	}
@@ -124,7 +142,7 @@ public class MotActuel {
 		
 		
 		if (lexinode.getDefinition().contentEquals("")==false) {
-			System.out.print("ES");
+		
 			definition = lexinode.getDefinition();
 		}
 	}

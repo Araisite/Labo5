@@ -25,22 +25,33 @@ public class LexiNode {
 	
 	public void ajouterMot (String mot, String definition) {
 		
-		if (mot.isEmpty() != true) {
+	
 		
+		//Condition de fin de la récursivité, quand le mot est vide
+		if (mot.isEmpty() != true) {
+			
+		
+			//Première lettre du mot
 			char lettreCourante = mot.charAt(0);
 			
-			String defTemp;
+			//Initialisation d'une définition temporaire
+			String defTemp="";
 			
+			
+			//Boucle qui parcours les enfants existants du noeud
 			for (int i=0; i<enfants.size(); i++) {
 				
+				//Condition pour savoir si l'enfants existe deja
 				if(enfants.get(i).lettreAcutelle == lettreCourante) {
 					
+					//Récursivité, on accède à l'enfant 
 					enfants.get(i).ajouterMot(mot.substring(1), definition);
 					return;
 				}
 			}
-				
-			if (mot.substring(1).contentEquals("")==false) {
+			
+			//Si le mot n'est pas vide, definition à null
+			if (mot.substring(1).isEmpty() == false) {
 				
 				defTemp = "";
 			}
@@ -49,15 +60,27 @@ public class LexiNode {
 				defTemp = definition;
 			}
 			
+			//création du noeud enfant
 			LexiNode noeud = new LexiNode(lettreCourante, motCourant+lettreCourante, defTemp);
 			enfants.add(noeud);
 					
-			if (mot.substring(1) !=" ") {
+			if (mot.substring(1).contentEquals(" ")==false) {
 				
 				noeud.ajouterMot(mot.substring(1), definition);
 			}
-		}			
+		}	
+		//Condition : si mot vide, mais qui possède des enfants
+		else {
+			if (enfants.size()>0) {
+		
+				this.definition = definition;
+			}
+		}
+		
+		
 	}
+	
+	
 	
 	
 	

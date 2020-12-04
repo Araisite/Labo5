@@ -10,6 +10,13 @@ public class Dictionnaire {
 		Fichier fichier = new Fichier();
 		
 		dictionnaire = fichier.obtenirMotsDefinitions();
+		
+		for (int i=0; i<dictionnaire.size();i++) {
+			
+			String min = dictionnaire.get(i).toLowerCase();
+			dictionnaire.set(i, min);
+		}
+		
 	}
 	
 	public String getMot(int i) {
@@ -46,4 +53,19 @@ public class Dictionnaire {
 		}
 		return verif;
 	}	
+	
+	public void deleteMot (int i) {
+		
+		dictionnaire.remove(i);
+	}
+	
+	public void setDefinition (String def, int i) {
+		
+		dictionnaire.set(i, def);
+	}
+	
+	public String getLigne(int i) {
+		
+		return dictionnaire.get(i);
+	}
 }

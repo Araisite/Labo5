@@ -44,7 +44,7 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 	private JLabel label2 = new JLabel("def");
 	private JLabel label3 = new JLabel("terrible");
 
-	private JLabel afficheDef = new JLabel("");
+	private JTextArea afficheDef = new JTextArea("");
 
 	private JTextField tfMot = new JTextField(16);
 
@@ -97,6 +97,7 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 		pnlDef.setMaximumSize(new Dimension(400, 100));
 		pnlDef.setBorder(BorderFactory.createTitledBorder("Definition"));
 		pnlDef.add(afficheDef);
+		afficheDef.setLineWrap(true);
 		//pnlDef.add(Dictionnaire.getDefinition(1));
 
 		pnlMain.add(pnlDef, BorderLayout.CENTER);
