@@ -1,4 +1,3 @@
-package test;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -153,10 +152,10 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 			String mot = tfMot.getText();
 			String def = afficheDef.getText();
 			try {
-				new AjouterMotFichier(mot,def);
+				new AjouterMotFichier(mot,def, testDico.getAdresse());
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
+			} 
 		}
 
 		this.frameMain.revalidate();

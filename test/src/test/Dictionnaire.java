@@ -1,10 +1,10 @@
-package test;
-
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Dictionnaire {
 
 	private LinkedList <String> dictionnaire = new LinkedList <String> ();
+	private String adresse;
 	
 	public Dictionnaire (){
 		
@@ -12,14 +12,16 @@ public class Dictionnaire {
 		
 		dictionnaire = fichier.obtenirMotsDefinitions();
 		
+		adresse = fichier.getAdresse();
+		
 		for (int i=0; i<dictionnaire.size();i++) {
 			
 			String min = dictionnaire.get(i).toLowerCase();
 			dictionnaire.set(i, min);
 		}
-
+		
 	}
-
+	
 	public String getMot(int i) {
 		
 		String [] separation;
@@ -68,5 +70,10 @@ public class Dictionnaire {
 	public String getLigne(int i) {
 		
 		return dictionnaire.get(i);
+	}
+	
+	public String getAdresse() {
+		
+		return adresse;
 	}
 }

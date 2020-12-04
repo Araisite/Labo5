@@ -1,4 +1,4 @@
-package test;
+
 
 import java.io.*;
 
@@ -6,15 +6,18 @@ public class AjouterMotFichier {
 
 
     //private static File nomDuFichier;
-    private static File copieTemporaire = new File("C:\\Users\\cocos\\Documents\\test.txt");
-    private static File source = new File("C:\\Users\\cocos\\Documents\\dictionnaire.txt");
+    private static File copieTemporaire = new File("Documents");
+    private static File source = new File("");
 
-    public AjouterMotFichier(String mot, String def) throws IOException {
-        AjouterMot(mot,def);
+    public AjouterMotFichier(String mot, String def, String adresse) throws IOException {
+        AjouterMot(mot,def, adresse);
     }
 
-    public void AjouterMot(String mot, String def) {
+    public void AjouterMot(String mot, String def, String adresse) {
 
+    	File sourceTemp = new File(adresse);
+    	source = sourceTemp;
+    	
         BufferedWriter bufEcrire = null;
         FileWriter ecrire = null;
 

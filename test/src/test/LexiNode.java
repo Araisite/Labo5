@@ -1,5 +1,3 @@
-package test;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -29,14 +27,14 @@ public class LexiNode {
 		
 	
 		
-		//Condition de fin de la rï¿½cursivitï¿½, quand le mot est vide
+		//Condition de fin de la récursivité, quand le mot est vide
 		if (mot.isEmpty() != true) {
 			
 		
-			//Premiï¿½re lettre du mot
+			//Première lettre du mot
 			char lettreCourante = mot.charAt(0);
 			
-			//Initialisation d'une dï¿½finition temporaire
+			//Initialisation d'une définition temporaire
 			String defTemp="";
 			
 			
@@ -46,13 +44,13 @@ public class LexiNode {
 				//Condition pour savoir si l'enfants existe deja
 				if(enfants.get(i).lettreAcutelle == lettreCourante) {
 					
-					//Rï¿½cursivitï¿½, on accï¿½de ï¿½ l'enfant 
+					//Récursivité, on accède à l'enfant 
 					enfants.get(i).ajouterMot(mot.substring(1), definition);
 					return;
 				}
 			}
 			
-			//Si le mot n'est pas vide, definition ï¿½ null
+			//Si le mot n'est pas vide, definition à null
 			if (mot.substring(1).isEmpty() == false) {
 				
 				defTemp = "";
@@ -62,7 +60,7 @@ public class LexiNode {
 				defTemp = definition;
 			}
 			
-			//crï¿½ation du noeud enfant
+			//création du noeud enfant
 			LexiNode noeud = new LexiNode(lettreCourante, motCourant+lettreCourante, defTemp);
 			enfants.add(noeud);
 					
@@ -71,7 +69,7 @@ public class LexiNode {
 				noeud.ajouterMot(mot.substring(1), definition);
 			}
 		}	
-		//Condition : si mot vide, mais qui possï¿½de des enfants
+		//Condition : si mot vide, mais qui possède des enfants
 		else {
 			if (enfants.size()>0) {
 		

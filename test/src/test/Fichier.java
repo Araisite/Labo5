@@ -1,6 +1,5 @@
-package test;
-
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -8,7 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
 public class Fichier {
-
+	
+	private static String adresse="";
+		
 	public static LinkedList<String> obtenirMotsDefinitions() {
 		
 		//Déclaration de la liste à retourner
@@ -29,6 +30,13 @@ public class Fichier {
 			//Déclaration du scanner
 			Scanner scan = new Scanner (fc.getSelectedFile());
 			
+			try {
+				adresse = fc.getSelectedFile().getCanonicalPath();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			//itérateur
 			int i=0;
 			
@@ -48,5 +56,10 @@ public class Fichier {
 		
 		//retour de la liste avec definitions et mots
 		return dictionnaire;
+	}
+	
+	public String getAdresse() {
+		
+		return adresse;
 	}
 }
