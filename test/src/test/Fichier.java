@@ -1,3 +1,6 @@
+package test;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,5 +64,51 @@ public class Fichier {
 	public String getAdresse() {
 		
 		return adresse;
+	}
+
+
+	public static LinkedList<String> directionFicher(String adresse) {
+
+		//D?claration de la liste ? retourner
+		LinkedList <String> dictionnaire = new LinkedList <String> ();
+
+
+		File fc = new File (adresse);
+
+
+
+
+		//Try-Catch pour l'ouverture du fichier
+		try {
+
+			//D?claration du scanner
+			Scanner scan = new Scanner (fc);
+
+			try {
+				adresse = fc.getCanonicalPath();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			//it?rateur
+			int i=0;
+
+			while (scan.hasNextLine()) {
+
+				dictionnaire.add(i, scan.nextLine());
+			}
+
+			//fermeture du scanner
+			scan.close();
+
+			//Si le fichier n'est pas trouv?, lanc? l'exception StackTrace
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+
+		//retour de la liste avec definitions et mots
+		return dictionnaire;
 	}
 }
