@@ -1,4 +1,4 @@
-package test;
+
 
 import java.io.*;
 
@@ -38,6 +38,7 @@ public class AjouterMotFichier {
 
 
             try{
+            //File nomDuFichier = File.createTempFile("data", null);
             ecrire = new FileWriter(copieTemporaire, true); // Permet d'ecrire dans le fichier sans supprimer son contenu
             bufEcrire = new BufferedWriter(ecrire);
             bufEcrire.newLine(); // Saut a la ligne

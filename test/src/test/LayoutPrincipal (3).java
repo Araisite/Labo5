@@ -1,4 +1,3 @@
-package test;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -11,7 +10,19 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JToolBar;
+import javax.swing.JTree;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
 
 
@@ -39,7 +50,6 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 
 	private JTextField tfMot = new JTextField(16);
 
-	private JOptionPane alerteSave = new JOptionPane();
 
 	JPanel buttonContainer = new JPanel();
 
@@ -131,41 +141,49 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 			pnlChercher.repaint();
 		}
 		if (event.getSource() == btnEnregistrer) {
-
-				try {
-					new EnregistrerFichierTXT(testDico.getAdresse());
-					AjouterMotFichier.supFichier();
-					Dictionnaire dictAjout = new Dictionnaire(testDico.getAdresse());
-					testDico = dictAjout;
-					MotActuel temp = new MotActuel(dictAjout);
-					motActuel = temp;
-				} catch (NullPointerException | IOException e) {
-					//e.printStackTrace();
-					JFrame frameErreur = new JFrame();
-					System.err.println("Erreur enregistrement, Veuillez ajouter ou modifier pour pouvoir enregistrer");
-					JOptionPane.showMessageDialog(frameErreur,
-							"Veuillez ajouter ou modifier pour pouvoir enregistrer",
-							"Erreur enregistrement!!",
-							JOptionPane.ERROR_MESSAGE);
+			try {
+				new EnregistrerFichierTXT(testDico.getAdresse());
+				AjouterMotFichier.supFichier();
+				Dictionnaire dictAjout = new Dictionnaire (testDico.getAdresse());
+				testDico = dictAjout;
+				
+				String motInstant = motActuel.getMot();
+				MotActuel temp = new MotActuel (dictAjout);
+				motActuel = temp;
+				System.out.print(motInstant);
+				for (int i=0; i<motInstant.length(); i++ ) {
+					motActuel.setMot(motInstant.charAt(i));
 				}
-				new MotActuel(testDico);
+				
+				afficheChercher.setText(motActuel.getAffichage());
+				
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-
-
+		}
 		if (event.getSource() == btnAjouter) {
 			String mot = tfMot.getText();
 			String def = afficheDef.getText();
-			String adresse = testDico.getAdresse();
 			try {
-				new AjouterMotFichier(mot, def, adresse);
-			} catch (IOException | NullPointerException e) {
-				//e.printStackTrace();
-				System.err.println("Erreur Ajouter/Modifier");
-
+				new AjouterMotFichier(mot,def, testDico.getAdresse());
+			} catch (IOException e) {
+				e.printStackTrace();
 			} 
 		}
-
+		
+		if (event.getSource() == btnCharger) {
+			
+			Dictionnaire dictCharger = new Dictionnaire ();
+			MotActuel newMotActuel = new MotActuel (dictCharger);
+			motActuel = newMotActuel;
+			motActuel.setMot(' ');
+			afficheChercher.setText(motActuel.getAffichage());
+			tfMot.setText("");
+			afficheDef.setText("");
+		}
+		
 		this.frameMain.revalidate();
+	
 	}
 
 

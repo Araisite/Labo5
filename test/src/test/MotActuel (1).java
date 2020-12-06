@@ -1,5 +1,3 @@
-package test;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -147,6 +145,11 @@ public class MotActuel {
 		
 			definition = lexinode.getDefinition();
 		}
+	}
+	
+	public String getMot() {
+		
+		return mot;
 	}
 	
 

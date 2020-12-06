@@ -1,5 +1,3 @@
-package test;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -23,23 +21,22 @@ public class Dictionnaire {
 		}
 		
 	}
-
+	
 	public Dictionnaire (String adresse) {
-
+		
 		Fichier fichier = new Fichier();
-
+		
 		dictionnaire = fichier.directionFicher(adresse);
-
+		
 		adresse = fichier.getAdresse();
-
+		
 		for (int i=0; i<dictionnaire.size();i++) {
-
+			
 			String min = dictionnaire.get(i).toLowerCase();
 			dictionnaire.set(i, min);
 		}
 	}
-
-
+	
 	public String getMot(int i) {
 		
 		String [] separation;
