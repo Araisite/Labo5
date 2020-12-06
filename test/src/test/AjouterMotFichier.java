@@ -1,8 +1,8 @@
-
+package test;
 
 import java.io.*;
 
-public class AjouterMotFichier {
+public class AjouterMotFichier extends Dictionnaire{
 
 
     //private static File nomDuFichier;
@@ -15,39 +15,38 @@ public class AjouterMotFichier {
 
     public void AjouterMot(String mot, String def, String adresse) {
 
-    	File sourceTemp = new File(adresse);
-    	source = sourceTemp;
-    	
+            File source = new File(adresse);
+
+
         BufferedWriter bufEcrire = null;
         FileWriter ecrire = null;
 
         try (InputStream sourceFile = new java.io.FileInputStream(source);
              OutputStream destinationFile = new FileOutputStream(copieTemporaire)) {
-            // Lecture par segment de 0.5Mo
-            byte buffer[] = new byte[512 * 1024];
+
+            byte buffer[] = new byte[512 * 1024]; // Lecture par segment de 0.5Mo
             int nbLecture;
-            //destinationFile.write(Fichier.obtenirMotsDefinitions());
+            /* Lit le fichier a copier et ecrit sur le fichier de destination */
             while ((nbLecture = sourceFile.read(buffer)) != -1) {
                 destinationFile.write(buffer, 0, nbLecture);
             }
             System.out.println("Copie");
 
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Trace les erreurs et les affiches dans le terminal
         }
 
 
             try{
-            //File nomDuFichier = File.createTempFile("data", null);
             ecrire = new FileWriter(copieTemporaire, true); // Permet d'ecrire dans le fichier sans supprimer son contenu
             bufEcrire = new BufferedWriter(ecrire);
             bufEcrire.newLine(); // Saut a la ligne
             bufEcrire.write(mot + " & " + def);
-            System.out.println(copieTemporaire.getCanonicalPath());
+            System.out.println(copieTemporaire.getCanonicalPath()); // Affiche le chemin d'acces du txt temporaire
 
             System.out.println("Ajout");
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Trace les erreurs et les affiches dans le terminal
 
         } finally {
 

@@ -1,3 +1,4 @@
+package test;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -10,19 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JToolBar;
-import javax.swing.JTree;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.*;
 import javax.swing.border.Border;
 
 
@@ -63,7 +52,7 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 
 	public LayoutPrincipal() {
 
-
+		/*  */
 		this.btnCharger.addActionListener(this);
 		pnlBouton.add(this.btnCharger);
 
@@ -85,8 +74,8 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 			myButton[i] = new JButton(testDico.getMot(i));
 			buttonContainer.add(myButton[i]);
 			buttonContainer.setLayout(new BoxLayout(buttonContainer, BoxLayout.Y_AXIS));
-			myButton[i].addActionListener(this::actionPerformed);
 		}
+		/* Ajout de scroll barre */
 		JScrollPane scrollListe = new JScrollPane(buttonContainer, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		pnlListe.add(scrollListe);
 		pnlMain.add(pnlListe, BorderLayout.EAST);
@@ -99,7 +88,6 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 		pnlDef.setBorder(BorderFactory.createTitledBorder("Definition"));
 		pnlDef.add(afficheDef);
 		afficheDef.setLineWrap(true);
-		//pnlDef.add(Dictionnaire.getDefinition(1));
 
 		pnlMain.add(pnlDef, BorderLayout.CENTER);
 
@@ -136,15 +124,13 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		if (event.getSource() == myButton[2]) {
-			afficheDef.setText(motActuel.getDef());
-			pnlChercher.repaint();
-		}
+
 		if (event.getSource() == btnEnregistrer) {
 			try {
-				new EnregistrerFichierTXT(testDico.getAdresse());
+				String adresse = testDico.getAdresse();
+				new EnregistrerFichierTXT(adresse);
 				AjouterMotFichier.supFichier();
-				Dictionnaire dictAjout = new Dictionnaire (testDico.getAdresse());
+				Dictionnaire dictAjout = new Dictionnaire (adresse);
 				testDico = dictAjout;
 				
 				String motInstant = motActuel.getMot();
@@ -158,16 +144,29 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 				afficheChercher.setText(motActuel.getAffichage());
 				
 			} catch (IOException e) {
-				e.printStackTrace();
+				e.printStackTrace(); // Trace les erreurs et les affiches dans le terminal
+				/* cree un pop up d'alerte*/
+				JOptionPane alerteEnregistrer = new JOptionPane();
+				JOptionPane.showMessageDialog(alerteEnregistrer,
+						"Veuillez ajouter/modifier un mot avant d'enregistrer.",
+						"Erreur enregistrement",
+						JOptionPane.WARNING_MESSAGE);
 			}
 		}
 		if (event.getSource() == btnAjouter) {
 			String mot = tfMot.getText();
 			String def = afficheDef.getText();
+			String adresse = testDico.getAdresse();
 			try {
-				new AjouterMotFichier(mot,def, testDico.getAdresse());
-			} catch (IOException e) {
-				e.printStackTrace();
+				new AjouterMotFichier(mot, def, adresse);
+			} catch (IOException | NullPointerException e) {
+				e.printStackTrace(); // Trace les erreurs et les affiches dans le terminal
+				/* cree un pop up d'alerte*/
+				JOptionPane alerteAjouter = new JOptionPane();
+				JOptionPane.showMessageDialog(alerteAjouter,
+						"Erreur d'ajout ou de modification.",
+						"Erreur ajouter/modifier",
+						JOptionPane.WARNING_MESSAGE);
 			} 
 		}
 		
@@ -181,9 +180,7 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 			tfMot.setText("");
 			afficheDef.setText("");
 		}
-		
 		this.frameMain.revalidate();
-	
 	}
 
 
