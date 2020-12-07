@@ -1,3 +1,5 @@
+package mainLab;
+
 import java.util.LinkedList;
 
 /**

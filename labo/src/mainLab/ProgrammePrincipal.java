@@ -1,3 +1,5 @@
+package mainLab;
+
 /**
 
  @author Philippe Meuser, Corentin Seguin

@@ -1,3 +1,5 @@
+package mainLab;
+
 /**
  Cette classe permet de savoir le mot qui est entrain d'etre ecrit et de connaitre par la suite tout les mots qui ont la meme base
  @author Philippe Meuser, Corentin Seguin

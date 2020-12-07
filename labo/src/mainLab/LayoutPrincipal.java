@@ -1,3 +1,4 @@
+package mainLab;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -19,7 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
 /**
-Cette classe sert à la cération des GUI
+Cette classe sert ï¿½ la cï¿½ration des GUI
 @author Philippe Meuser, Corentin Seguin
 @version 1.0
 @since 2020/12/06
@@ -29,7 +30,7 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 	//Creation du dictionnaire qui va chercher le fichier
 	private Dictionnaire testDico = new Dictionnaire();
 	
-	//Création de l'arbre avec les mots du dictionnaire
+	//Crï¿½ation de l'arbre avec les mots du dictionnaire
 	private MotActuel motActuel = new MotActuel(testDico);
 	
 
@@ -93,7 +94,7 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 		pnlListe.setMaximumSize(new Dimension(300, 100));
 		pnlListe.setBorder(BorderFactory.createTitledBorder("Liste Mots"));
 		
-		//Liste de mots à afficher à droite
+		//Liste de mots ï¿½ afficher ï¿½ droite
 		String listeDroite ="";
 		
 		// Affichage de la liste de mot, parcours la liste
@@ -148,23 +149,23 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 		frameMain.setResizable(false);
 
 		
-		//Début de l'opération avec le dictionnaire vide
+		//Dï¿½but de l'opï¿½ration avec le dictionnaire vide
 		motActuel.setMot(' ');
 		afficheChercher.setText(motActuel.getAffichage());
 	}
 
 	
 	/**
-   	Cette méthode est à l'affut de tous les evenements sur les boutons
+   	Cette mï¿½thode est ï¿½ l'affut de tous les evenements sur les boutons
     @param ActionEvent event
 	*/
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		
-		//Si le bouton enregistrer est cliqué
+		//Si le bouton enregistrer est cliquï¿½
 		if (event.getSource() == btnEnregistrer) {
 			try {
-				//Deuxième panneau ouvre
+				//Deuxiï¿½me panneau ouvre
 				nameFrame.setTitle("Choisir nom du fichier ; appuyer sur Entrer pour fermer");
 				nameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				nameFrame.pack();
@@ -192,7 +193,7 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 				MotActuel temp = new MotActuel (dictAjout);
 				motActuel = temp;
 				
-				//Mise à jour du dicitionnaire sleon le mot actuellement ecrit
+				//Mise ï¿½ jour du dicitionnaire sleon le mot actuellement ecrit
 				for (int i=0; i<motInstant.length(); i++ ) {
 					motActuel.setMot(motInstant.charAt(i));
 				}
@@ -200,7 +201,7 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 				//Afficher la bonne liste de mot
 				afficheChercher.setText(motActuel.getAffichage());
 				
-				//remise à 0 de la liste de droite avec les nouveaux mots
+				//remise ï¿½ 0 de la liste de droite avec les nouveaux mots
 				String listeDroite ="";
 				
 				for (int i = 0; i < testDico.getNbrMots(); i++) { // Affichage de la liste de mot
@@ -224,17 +225,17 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 			
 			try {
 				
-				//Ajouter le fichier grâce à ajoutermotfichier
+				//Ajouter le fichier grï¿½ce ï¿½ ajoutermotfichier
 				new AjouterMotFichier(mot,def, testDico.getAdresse());
 			} catch (IOException e) {
 				e.printStackTrace();
 			} 
 		}
 		
-		//Si le bouton chargé est cliqué
+		//Si le bouton chargï¿½ est cliquï¿½
 		if (event.getSource() == btnCharger) {
 			
-			//Reprise des étapes initiales avec un nouveau choix de fichier texte
+			//Reprise des ï¿½tapes initiales avec un nouveau choix de fichier texte
 			Dictionnaire dictCharger = new Dictionnaire ();
 			MotActuel newMotActuel = new MotActuel (dictCharger);
 			motActuel = newMotActuel;
@@ -249,7 +250,7 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 
 	
 	/**
-	 Cette classe sert à l'écouter clavier du mot tappé
+	 Cette classe sert ï¿½ l'ï¿½couter clavier du mot tappï¿½
 	 @author Philippe Meuser, Corentin Seguin
 	 @version 1.0
 	 @since 2020/12/06
@@ -280,7 +281,7 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 	
 	
 	/**
-	 Cette classe sert à l'écouter clavier lorsque l'utlisateur choisi le nom de son fichier
+	 Cette classe sert ï¿½ l'ï¿½couter clavier lorsque l'utlisateur choisi le nom de son fichier
 	 @author Philippe Meuser, Corentin Seguin
 	 @version 1.0
 	 @since 2020/12/06
@@ -316,7 +317,7 @@ public class LayoutPrincipal extends JFrame implements ActionListener {
 			}
 			
 			else {
-				//Le nouveua nom du fichier s'allonge du caractere demandé par l'utlisateur
+				//Le nouveua nom du fichier s'allonge du caractere demandï¿½ par l'utlisateur
 				nomDuFichier = nomDuFichier + e.getKeyChar();
 			}			
 		}

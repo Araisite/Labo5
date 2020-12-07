@@ -1,4 +1,4 @@
-
+package mainLab;
 
 import javax.swing.*;
 import java.io.*;

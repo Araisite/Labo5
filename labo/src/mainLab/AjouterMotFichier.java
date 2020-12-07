@@ -1,9 +1,9 @@
-
+package mainLab;
 
 import java.io.*;
 
 /**
- Cette classe sert à ajouter un nouveau mot et une définition à un fichier temporaraire txt
+ Cette classe sert ï¿½ ajouter un nouveau mot et une dï¿½finition ï¿½ un fichier temporaraire txt
  @author Philippe Meuser, Corentin Seguin
  @version 1.0
  @since 2020/12/06
@@ -15,9 +15,9 @@ public class AjouterMotFichier{
     private static File source = new File("");
 
     /**
-       Ce constructeur a besoin du mot de la définition et de l'adresse du fichier source
-       @param mot le mot à ajouter
-       @param def la définition à ajouter
+       Ce constructeur a besoin du mot de la dï¿½finition et de l'adresse du fichier source
+       @param mot le mot ï¿½ ajouter
+       @param def la dï¿½finition ï¿½ ajouter
        @param adresse l'adresse de destination du fichier
        @throws IOException
      */
@@ -82,7 +82,7 @@ public class AjouterMotFichier{
     }
 
     /**
-       Cette méthode permet d'obtenir l'adresse du fichier temporaire créé
+       Cette mï¿½thode permet d'obtenir l'adresse du fichier temporaire crï¿½ï¿½
        @return l'adresse du fichier temporaire
      */
     public static File getFichier(){
@@ -91,7 +91,7 @@ public class AjouterMotFichier{
     }
 
     /**
-       Cette méthode supprimme le fichier temporaire
+       Cette mï¿½thode supprimme le fichier temporaire
      */
     public static void supFichier(){ 
     	
@@ -99,7 +99,7 @@ public class AjouterMotFichier{
     }
 
     /**
-     * Cette méthode permet de choisir le nom du nouveau fichier
+     * Cette mï¿½thode permet de choisir le nom du nouveau fichier
      * @param nom
      */
     public static void choisirNomFicher(String nom) {
@@ -113,7 +113,7 @@ public class AjouterMotFichier{
         //Boucle qui parcourt le nom du fichier actuellement utiliser
         while (temp.length()!=0) {
 
-        	//Réduire le path actuelle de un jusqu'à ce que le nom du fichier soit effacé
+        	//Rï¿½duire le path actuelle de un jusqu'ï¿½ ce que le nom du fichier soit effacï¿½
             ancienne = ancienne.substring(0, ancienne.length()-1);
             temp = temp.substring(0, temp.length()-1);
         }
