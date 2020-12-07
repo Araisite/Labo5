@@ -96,9 +96,7 @@ public class LexiNode {
 		
 		LexiNode temp = this;
 		boolean verif=false;
-		
-		
-		
+
 		if (mot.length()!=0) {
 			
 			char lettreCourante  = mot.charAt(0);
